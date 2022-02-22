@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/mcleanGit/readmegen/issues"
   },
-  "homepage": "https://github.com/mcleanGit/readmegen#readme"
+  "homepage": "https://github.com/mcleanGit/readmegen#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
