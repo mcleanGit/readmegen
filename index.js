@@ -1,14 +1,10 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const util = require("util");
+// const generateMarkdown = require('./utils/generateMarkdown.js');
 
-const generateMarkdown = require('./utils/generateMarkdown');
-
-// TODO: Create an array of questions for user input const promptUser to check
-const promptUser = () => {
- return inquirer.prompt([
-//const questions = [
+// TODO: Create an array of questions for user input
+const questions = [
  {
   type: "input",
   name: "title",
@@ -35,9 +31,23 @@ const promptUser = () => {
    }
    }
  },
+ { 
+  type: "list",
+  name: "licenseBadge",
+  message: "Please select the license that applies to your project--a license badge will be applied",
+  choices: [
+   "Apache",
+   "Boost",
+   "BSD_3-Clause",
+   "Creative_Commons_Zero (CC0) v.1.0",
+   "GNU_GPL (General Public License) v.3.0",
+   "MIT",
+   "Mozilla",
+   ],
+  },
  {
   type: "input",
-  name: "table-of-contents",
+  name: "contents",
   message: "Please enter a Table of Contents (optional) for your project",
  },
  {
@@ -52,8 +62,8 @@ const promptUser = () => {
  },
  {
   type: "list",
-  name: "license",
-  message: "Please select the license that applies to your project",
+  name: "licenseLink",
+  message: "Please select the link to license information that applies to your project--matching the badge above",
   choices: [
    "Apache",
    "Boost",
@@ -100,19 +110,20 @@ const promptUser = () => {
    }
    }
   },
-]);
-};
+  { type: "input",
+    name: "email",
+    message: "Please enter your email address",
+  }
+]
+
+inquirer.prompt(questions)
 
 // TODO: Create a function to write README file
 //function writeToFile(fileName, data) {}
 
 // TODO: Create a function to initialize app
-function init() {
-
-}
+//function init() {
 
 // Function call to initialize app
 //init();
 
-// temporary test of questions prompt loading
-promptUser()
