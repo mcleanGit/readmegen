@@ -1,10 +1,12 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-// const generateMarkdown = require('./utils/generateMarkdown.js');
+const utils = require('./utils/generateMarkdown.js');
+
 
 // TODO: Create an array of questions for user input
-const questions = [
+inquirer
+.prompt([
  {
   type: "input",
   name: "title",
@@ -36,6 +38,7 @@ const questions = [
   name: "licenseBadge",
   message: "Please select the license that applies to your project--a license badge will be applied",
   choices: [
+   " ",
    "Apache",
    "Boost",
    "BSD_3-Clause",
@@ -65,6 +68,7 @@ const questions = [
   name: "licenseLink",
   message: "Please select the link to license information that applies to your project--matching the badge above",
   choices: [
+   " ",
    "Apache",
    "Boost",
    "BSD_3-Clause",
@@ -72,6 +76,7 @@ const questions = [
    "GNU_GPL (General Public License) v.3.0",
    "MIT",
    "Mozilla",
+   "None",
    ],
  },
  {
@@ -87,15 +92,20 @@ const questions = [
  {
   type: "input",
   name: "questions",
-  message: "Please enter your GitHub userName (required)",
-  validate: questionsInput => {
-   if (questionsInput) {
-    return true;
-   } else {
-    console.log("Please enter your GitHub userName!");
-    return false;
-   }
-   }
+  message: "Please indicate below where you may be contacted for questions: git hub user name and repo link",
+ },
+ {
+   type: "input",
+   name: "username",
+   message: "Please provide your GitHub user name (required)",
+   validate: usernameInput => {
+    if (usernameInput) {
+     return true;
+    } else {
+     console.log("Please enter your GitHub user Name!");
+     return false;
+    }
+  }
  },
  {
   type: "input",
@@ -114,16 +124,61 @@ const questions = [
     name: "email",
     message: "Please enter your email address",
   }
-]
+])
+.then((data) => {
+  console.log(data);
+});
 
-inquirer.prompt(questions)
 
-// TODO: Create a function to write README file
-//function writeToFile(fileName, data) {}
+
+/* function writeToFile(README, data) {
+  return `
+    # ${data.title},
+  ## ${data.description},
+  ## ${data.licenseBadge},
+  ---
+  ## ${data.contents},
+  ---
+  ## ${data.installation},
+  ## ${data.usage},
+  ## ${data.licenseLink},
+  ## ${data.contributing},
+  ## ${data.tests},
+  ---
+  ## ${data.questions},
+  ### ${data.userName},
+  ### ${data.github},
+  ### ${data.email},
+  `;
+  }
+
+writeToFile ()
+
+// inquirer
+ // .prompt ([questions])
+  //.then ((answers) => {
+   // data.answers
+  //})
+  //.catch ((error) => {
+  //  if (error.isTtyError) {
+  //  } else {
+  //  }
+  // });
+
+//  TODO: Create a function to write README file  THIS IS FISHER RUN
+// async function init() {
+ // try {
+  //  const answers = await inquirer.prompt(questions);
+    // generateMarkdown not defined... ??
+  //  let readmeData = generateMarkdown(answers);
+  //  await fs.writeFileAsync("created-README.md", readmeData);
+  //} catch (err) {
+  //  throw err;
+  //}
+//}
 
 // TODO: Create a function to initialize app
-//function init() {
+//function init() {}
 
-// Function call to initialize app
-//init();
-
+// init();
+*/
