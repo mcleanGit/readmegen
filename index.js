@@ -1,10 +1,12 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const utils = require('./utils/generateMarkdown.js');
+const generateMarkdown = require('./utils/generateMarkdown.js');
+// const renderBadgeLicense
+// const renderLicenseLink
 
 
-// TODO: Create an array of questions for user input
+// TODO: Create an array of questions for user input [or as array module]
 inquirer
 .prompt([
  {
@@ -38,7 +40,6 @@ inquirer
   name: "licenseBadge",
   message: "Please select the license that applies to your project--a license badge will be applied",
   choices: [
-   " ",
    "Apache",
    "Boost",
    "BSD_3-Clause",
@@ -46,8 +47,9 @@ inquirer
    "GNU_GPL (General Public License) v.3.0",
    "MIT",
    "Mozilla",
-   ],
-  },
+   "",
+  ],
+ },
  {
   type: "input",
   name: "contents",
@@ -68,7 +70,6 @@ inquirer
   name: "licenseLink",
   message: "Please select the link to license information that applies to your project--matching the badge above",
   choices: [
-   " ",
    "Apache",
    "Boost",
    "BSD_3-Clause",
@@ -76,8 +77,8 @@ inquirer
    "GNU_GPL (General Public License) v.3.0",
    "MIT",
    "Mozilla",
-   "None",
-   ],
+   "",
+  ] 
  },
  {
   type: "input",
@@ -125,60 +126,46 @@ inquirer
     message: "Please enter your email address",
   }
 ])
+// note: at present this only sends answers=data to console.log
 .then((data) => {
   console.log(data);
+  fs.writeFile();
+})
+.catch((error) => {
+  if (error.isTtyError) {
+  } else {
+  }
 });
 
+function writeFile (fileName, fileContent) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(`{$fileName}`, fileContent, err => {
+        if (err) {
+          reject(err);
+          return;
+        }
 
+        resolve({
+          ok: true,
+          message: `${fileName} created!`
+        });
+      });
+    });
+  };
 
-/* function writeToFile(README, data) {
-  return `
-    # ${data.title},
-  ## ${data.description},
-  ## ${data.licenseBadge},
-  ---
-  ## ${data.contents},
-  ---
-  ## ${data.installation},
-  ## ${data.usage},
-  ## ${data.licenseLink},
-  ## ${data.contributing},
-  ## ${data.tests},
-  ---
-  ## ${data.questions},
-  ### ${data.userName},
-  ### ${data.github},
-  ### ${data.email},
-  `;
+module.exports = { writeFile }
+//fs.writeToFile(README.md, data ) ?
+      
+// TODO: Create a function to initialize app -- third-party suggestion here ?
+/* async function init () {
+  try {
+    const data = await inquirer.prompt(questions);
+    let readmeData = generateMarkdown(data);
+    await writeFileAsync("file README.md", readmeData);   
+  } catch (err) {
+    throw err;
   }
+}
 
-writeToFile ()
-
-// inquirer
- // .prompt ([questions])
-  //.then ((answers) => {
-   // data.answers
-  //})
-  //.catch ((error) => {
-  //  if (error.isTtyError) {
-  //  } else {
-  //  }
-  // });
-
-//  TODO: Create a function to write README file  THIS IS FISHER RUN
-// async function init() {
- // try {
-  //  const answers = await inquirer.prompt(questions);
-    // generateMarkdown not defined... ??
-  //  let readmeData = generateMarkdown(answers);
-  //  await fs.writeFileAsync("created-README.md", readmeData);
-  //} catch (err) {
-  //  throw err;
-  //}
-//}
-
-// TODO: Create a function to initialize app
-//function init() {}
-
-// init();
+init();
 */
