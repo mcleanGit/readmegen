@@ -48,7 +48,7 @@ inquirer
    "MIT",
    "Mozilla",
    "",
-  ],
+  ]
  },
  {
   type: "input",
@@ -97,7 +97,7 @@ inquirer
  },
  {
    type: "input",
-   name: "username",
+   name: "userName",
    message: "Please provide your GitHub user name (required)",
    validate: usernameInput => {
     if (usernameInput) {
@@ -127,19 +127,23 @@ inquirer
   }
 ])
 // note: at present this only sends answers=data to console.log
-.then((data) => {
+.then ((data) => {
   console.log(data);
-  fs.writeFile();
+  return generateMarkdown(data);
+})
+ 
+.then((markdownText) => {
+  console.log(markdownText);
+  writeFile("README.md", markdownText);
 })
 .catch((error) => {
   if (error.isTtyError) {
   } else {
   }
 });
-
 function writeFile (fileName, fileContent) {
     return new Promise((resolve, reject) => {
-      fs.writeFile(`{$fileName}`, fileContent, err => {
+      fs.writeFile(fileName, fileContent, err => {
         if (err) {
           reject(err);
           return;
