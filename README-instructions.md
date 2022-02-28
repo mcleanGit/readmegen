@@ -1,20 +1,21 @@
 # 09 Node.js: Professional README Generator
 
-When creating an open source project on GitHub, it’s important to have a high-quality README for the app. This should include what the app is for, how to use the app, how to install it, how to report issues, and how to make contributions&mdash;this last part increases the likelihood that other developers will contribute to the success of the project. 
+# Description
+This README serves as the guide to the application READMEGEN.
+READMEGEN is a command-line application that generates a professional README file based on user input.
 
-You can quickly and easily generate a README file by using a command-line application to generate one. This allows the project creator to devote more time working on the project.
+The task of the assignment was to create a command-line application that dynamically generates a professional README.md file from a user's input using the [Inquirer package](https://www.npmjs.com/package/inquirer). It was useful to revfiew the [Guide to a Professional README](https://github.com/coding-boot-camp/potential-enigma/blob/master/readme-guide.md) as a reminder of best practice in high-quality professional README documents.
 
-Your task is to create a command-line application that dynamically generates a professional README.md file from a user's input using the [Inquirer package](https://www.npmjs.com/package/inquirer). Review the [Guide to a Professional README](https://github.com/coding-boot-camp/potential-enigma/blob/master/readme-guide.md) as a reminder of everything that a high-quality, professional README should contain. 
+As the application itself generates a README document, this README-instructions.md serves as a guide to its creation.
+More typical subdivisions of a README are found in the READMEGEN application.
 
-The application will be invoked by using the following command:
+The application is invoked by using the following command in the terminal:
 
 ```
 node index.js
 ```
 
-Because this application won’t be deployed, you’ll also need to provide a link to a walkthrough video that demonstrates its functionality. Revisit 2.2.4: Screencastify Tutorial in Module 2 of the **prework** as a refresher on how to record video from your computer. You’ll need to submit a link to the video **and** add it to the README of your project.
-
-Before you start, clone the [starter code](https://github.com/coding-boot-camp/potential-enigma).
+Here is the User Story associated with assignment and its acceptance criteria.
 
 ## User Story
 
