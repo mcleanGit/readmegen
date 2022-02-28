@@ -1,12 +1,15 @@
-// TODO: Include packages needed for this application
+// TODO: Include packages needed for this application -- node_modules including fs, inquirer, path to generateMarkdown
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
+// note: have not yet found a viable solution to rendering the license badge and link into the README
+// Badges and license links are found within the generateMarkdown script and are all funcional on testing
 // const renderBadgeLicense
 // const renderLicenseLink
 
 
-// TODO: Create an array of questions for user input [or as array module]
+// TODO: Create an array of questions for user input -- done, decided for now to place array within inquirer.prompt []
+// note: required responses re-prompt the user with repeat message!
 inquirer
 .prompt([
  {
@@ -68,7 +71,7 @@ inquirer
  {
   type: "list",
   name: "licenseLink",
-  message: "Please select the link to license information that applies to your project--matching the badge above",
+  message: "Please select the link to license information that applies to your project--matching the license badge above",
   choices: [
    "Apache",
    "Boost",
@@ -88,12 +91,12 @@ inquirer
  {
   type: "input",
   name: "tests",
-  message: "Please indicate any testing protocols applied to your project",
+  message: "Please indicate any testing protocols applied to this project",
  },
  {
   type: "input",
   name: "questions",
-  message: "Please indicate below where you may be contacted for questions: git hub user name and repo link",
+  message: "Please indicate below where you may be contacted for Questions: git hub user name, repo link, email",
  },
  {
    type: "input",
@@ -126,12 +129,12 @@ inquirer
     message: "Please enter your email address",
   }
 ])
-// note: at present this only sends answers=data to console.log
+// note: initially checked inquirer answers (data) return in console.log, adding return to generateMarkdown(data)
 .then ((data) => {
   console.log(data);
   return generateMarkdown(data);
 })
- 
+// sends data as markdownText to writeFile "README.md"
 .then((markdownText) => {
   console.log(markdownText);
   writeFile("README.md", markdownText);
@@ -141,6 +144,7 @@ inquirer
   } else {
   }
 });
+// writeFile function using fs.writeFile to asynchronously write data to file
 function writeFile (fileName, fileContent) {
     return new Promise((resolve, reject) => {
       fs.writeFile(fileName, fileContent, err => {
@@ -148,7 +152,6 @@ function writeFile (fileName, fileContent) {
           reject(err);
           return;
         }
-
         resolve({
           ok: true,
           message: `${fileName} created!`
@@ -158,11 +161,11 @@ function writeFile (fileName, fileContent) {
   };
 
 module.exports = { writeFile }
-//fs.writeToFile(README.md, data ) ?
       
-// TODO: Create a function to initialize app -- third-party suggestion here ?
+// TODO: Create a function to initialize app -- researched various third-party suggestions // commented out
+// note: although requisite in the assignment, the actions here are largely redundant as the node index.js initializes the app
 /* async function init () {
-  try {
+  try { 
     const data = await inquirer.prompt(questions);
     let readmeData = generateMarkdown(data);
     await writeFileAsync("file README.md", readmeData);   
@@ -170,6 +173,6 @@ module.exports = { writeFile }
     throw err;
   }
 }
-
+// similarly the init() call is not explicitly needed if the node index.js is considered sufficient intialization of the app
 init();
 */
